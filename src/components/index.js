@@ -3,8 +3,10 @@
 
 import Button from './Button'
 import TextField from './TextField'
+import Tooltip from './Tooltip'
 
 export default {
   Button,
-  TextField
+  TextField,
+  Tooltip
 }

@@ -1,9 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useQuery, gql } from '@apollo/client'
+
+const PARTICIPANTS = gql`
+  query GetParticipants {
+    participants {
+      email
+      phoneNumber
+    }
+  }
+`
 
 const ParticipantManagement = (props) => {
-  console.error('props', props)
+  const { getParticipants, title } = props
+  const { data } = useQuery(PARTICIPANTS)
+
+  useEffect(() => {
+    getParticipants()
+  }, [])
+
+  useEffect(() => {
+    if (data) {
+      // console.error('data', data)
+    }    
+  }, [data])
   return (
-    <div>ParticipantManagement</div>
+    <div>
+      {title}
+    </div>
   )
 }
 

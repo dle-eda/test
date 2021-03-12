@@ -46,5 +46,5 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers })
 server.listen().then(({ url }) => {
-  console.log(`listiening on ${url}`)
+  console.log(`listening on ${url}`)
 })

@@ -1,13 +1,17 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
+import { ApolloProvider } from '@apollo/client'
 import ParticipantManagement from './containers/ParticipantManagement'
 import reportWebVitals from './reportWebVitals'
 import rootStore from './store/rootStore'
+import { client } from './api'
 
 ReactDOM.render(
   <Provider store={rootStore}>
-    <ParticipantManagement />
+    <ApolloProvider client={client}>
+      <ParticipantManagement />
+    </ApolloProvider>
   </Provider>,
   document.getElementById('root')
 )

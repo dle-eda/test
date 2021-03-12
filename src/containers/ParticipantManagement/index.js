@@ -13,9 +13,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGroups: dispatch({ type: 'GET_GROUP' }),
-    getParticipants: dispatch({ type: 'GET_PARTICIPANT' }),
-    updateParticipants: dispatch({ type: 'UPDATE_PARTICIPANTS' }),
+    getGroups: () => dispatch({ type: 'GET_GROUP' }),
+    getParticipants: () => dispatch({ type: 'GET_PARTICIPANT' }),
+    updateParticipants: () => dispatch({ type: 'UPDATE_PARTICIPANTS' }),
   }
 }
 
