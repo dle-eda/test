@@ -7,7 +7,7 @@ import ParticipantManagement from 'components/pages/ParticipantManagement'
 const mapStateToProps = (state) => {
   return {
     ...state.participantReducer,
-    title: 'Participant Management'
+    title: 'SEND BY EMAIL / SMS'
   }
 }
 
