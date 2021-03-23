@@ -1,13 +1,14 @@
 const { ApolloServer, gql } = require('apollo-server')
-
+const ParticipantsAPI = require('./datasources/participant')
+const { createStore } = require('./utils')
 const typeDefs = gql`
   type Participant {
     id: Int
     email: String
-    phoneNumber: String
-    phoneCountry: String
-    firstName: String
-    lastName: String
+    phone: String
+    country_code: String
+    first_name: String
+    last_name: String
     group: String
   }
 
@@ -16,9 +17,20 @@ const typeDefs = gql`
     name: String
   }
 
+  type Response {
+    id: Int
+    message: String
+  }
+
   type Query {
-    participants: [Participant]
-    groups: [Group]
+    participant: [Participant]
+    group: [Group]
+  }
+
+  type Mutation {
+    createParticipant(email: String, phone: Int, country_code: String, first_name: String, last_name: String, group: String): Participant
+    updateParticipant(email: String, phone: Int, country_code: String, first_name: String, last_name: String, group: String): Participant
+    deleteParticipant(email: String): Response
   }
 `
 
@@ -73,12 +85,37 @@ const groups = [
 
 const resolvers = {
   Query: {
-    participants: () => participants,
-    groups: () => groups
+    group: () => groups,
+    participant: async (_source, _args, { dataSources }) => {
+      return dataSources.participantsAPI.getParticipants()
+    }
+  },
+  Mutation: {
+    createParticipant: async (_source, _args, { dataSources }) => {
+      return dataSources.participantsAPI.createParticipant(_args)
+    },
+    updateParticipant: async (_source, _args, { dataSources }) => {
+      return dataSources.participantsAPI.updateParticipant(_args)
+    },
+    deleteParticipant: async (_source, _args, { dataSources }) => {
+      return dataSources.participantsAPI.deleteParticipant(_args)
+    },
   }
 }
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const store = createStore()
+
+const server = new ApolloServer({ 
+  typeDefs, 
+  resolvers,
+  dataSources: () => {
+    return {
+      participantsAPI: new ParticipantsAPI({ store })
+    }
+  }
+})
 server.listen().then(({ url }) => {
+  store.testConnection()
+  store.synchronize()
   console.log(`listening on ${url}`)
 })

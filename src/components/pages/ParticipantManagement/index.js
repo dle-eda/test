@@ -21,14 +21,13 @@ import { Container, AddParticipantButton, ParticipantAccordionDetails, PanelIcon
 
 const PARTICIPANTS = gql`
   query GetParticipants {
-    participants {
+    participant2 {
       id
       email
-      phoneNumber
-      phoneCountry
-      phoneCountry
-      firstName
-      lastName
+      phone
+      country_code
+      first_name
+      last_name
       group
     }
   }
@@ -50,7 +49,7 @@ const ParticipantManagement = (props) => {
 
 
   useEffect(() => {
-    if (!!data.participants) {
+    if (!!data.participant2) {
       console.error('data2', data, dataGroup.groups)
     }
   }, [data, dataGroup])
