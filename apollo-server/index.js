@@ -18,7 +18,27 @@ const typeDefs = gql`
   }
 
   type Response {
+    success: Boolean
     message: String
+  }
+
+  input CreateParticipant {
+    email: String
+    phone: Int
+    country_code: String
+    first_name: String
+    last_name: String
+    group: String
+  }
+
+  input UpdateParticipant {
+    id: Int
+    email: String
+    phone: Int
+    country_code: String
+    first_name: String
+    last_name: String
+    group: String
   }
 
   type Query {
@@ -27,9 +47,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createParticipant(email: String, phone: Int, country_code: String, first_name: String, last_name: String, group: String): Response
-    updateParticipant(id: Int, email: String, phone: Int, country_code: String, first_name: String, last_name: String, group: String): Response
-    deleteParticipant(email: String): Response
+    createParticipant(participant: CreateParticipant): Response
+    updateParticipant(participant: UpdateParticipant): Response
+    deleteParticipant(id: Int): Response
   }
 `
 

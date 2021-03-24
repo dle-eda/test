@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import participantReducer from './participantReducer'
+import rootSaga from '../saga'
 
 // apply middle ware for async action
 // we use saga for middle ware
@@ -17,5 +18,6 @@ const rootReducer = combineReducers({
 })
 
 const store = createStore(rootReducer, compose(applyMiddleware(...middleWares)))
+sagaMiddleware.run(rootSaga)
 
 export default store

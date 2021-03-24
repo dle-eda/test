@@ -34,8 +34,8 @@ class ParticipantsAPI extends DataSource {
   }
 
   // DELETE Participant
-  async deleteParticipant({ email }) {
-    const res = await this.store.participant.destroy({ where: { email } })
+  async deleteParticipant({ id }) {
+    const res = await this.store.participant.destroy({ where: { id } })
 
     return !!res ? success(SUCCESS_MESSAGE.delete_success_1) : error(ERROR_MESSAGE.delete_error_1)
   }

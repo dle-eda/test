@@ -6,16 +6,18 @@ import ParticipantManagement from 'components/pages/ParticipantManagement'
 // instead of put logic and view into one place
 const mapStateToProps = (state) => {
   return {
-    ...state.participantReducer,
-    title: 'SEND BY EMAIL / SMS'
+    ...state.participantReducer
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getGroups: () => dispatch({ type: 'GET_GROUP' }),
+    getGroups: () => {
+      dispatch({ type: 'GET_GROUP' })
+    },
     getParticipants: () => dispatch({ type: 'GET_PARTICIPANT' }),
-    updateParticipants: () => dispatch({ type: 'UPDATE_PARTICIPANTS' }),
+    deleteParticipant: () => dispatch({ type: 'DELETE_PARTICIPANT' }),
+    updateParticipants: () => dispatch({ type: 'UPDATE_PARTICIPANTS' })
   }
 }
 

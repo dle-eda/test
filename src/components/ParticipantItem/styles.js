@@ -1,22 +1,13 @@
 import styled from 'styled-components'
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
 `
 
-export const EmailContainer = styled.div`
-
+export const DeleteIcon = styled(RemoveCircleOutlineIcon)`
+  color: red;
+  width: 16px;
+  height: 16px;
 `
-
-export const PhoneContainer = styled.div`
-
-`
-
-export const FirstNameContainer = styled.div`
-`
-
-export const LastNameContainer = styled.div`
-`
-
-export const GroupContainer = styled.div``
