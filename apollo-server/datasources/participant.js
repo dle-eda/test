@@ -1,4 +1,7 @@
 const { DataSource } = require('apollo-datasource')
+const isEmail = require('isemail')
+const { success, error } = require('../response')
+const { SUCCESS_MESSAGE , ERROR_MESSAGE} = require('../response/constants')
 class ParticipantsAPI extends DataSource {
   constructor({ store }) {
     super()
@@ -12,6 +15,8 @@ class ParticipantsAPI extends DataSource {
 
   // CREATE Participant
   async createParticipant({ email, phone, country_code, first_name, last_name, group }) {
+    if (!isEmail.validate(email)) return error(ERROR_MESSAGE.invalid_error_1)
+
     const res = await this.store.participant.findOrCreate({
       where: { email, phone, country_code, first_name, last_name, group },
     })
@@ -20,17 +25,19 @@ class ParticipantsAPI extends DataSource {
   }
 
   // UPDATE Participant
-  async updateParticipant({ email, phone, country_code, first_name, last_name, group }) {
-    const res = await this.store.participant.update({ email, phone, country_code, first_name, last_name, group }, {
-      where: { email, phone, country_code, first_name, last_name, group },
+  async updateParticipant({ id, ...others }) {
+    const res = await this.store.participant.update({ ...others }, {
+      where: { id },
     })
 
-    return res && res.length ? res[0] : false
+    return res && res.length ? success(SUCCESS_MESSAGE.update_success_1) : error(ERROR_MESSAGE.update_error_1)
   }
 
   // DELETE Participant
   async deleteParticipant({ email }) {
-    return !!this.store.participant.destroy({ where: { email } })
+    const res = await this.store.participant.destroy({ where: { email } })
+
+    return !!res ? success(SUCCESS_MESSAGE.delete_success_1) : error(ERROR_MESSAGE.delete_error_1)
   }
 }
 

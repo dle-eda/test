@@ -18,7 +18,6 @@ const typeDefs = gql`
   }
 
   type Response {
-    id: Int
     message: String
   }
 
@@ -28,41 +27,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createParticipant(email: String, phone: Int, country_code: String, first_name: String, last_name: String, group: String): Participant
-    updateParticipant(email: String, phone: Int, country_code: String, first_name: String, last_name: String, group: String): Participant
+    createParticipant(email: String, phone: Int, country_code: String, first_name: String, last_name: String, group: String): Response
+    updateParticipant(id: Int, email: String, phone: Int, country_code: String, first_name: String, last_name: String, group: String): Response
     deleteParticipant(email: String): Response
   }
 `
-
-const participants = [
-  {
-    id: 123,
-    email: 'abc@gmail.com',
-    phoneNumber: '01234555555',
-    phoneCountry: 'vn',
-    firstName: 'first Name 1',
-    lastName: 'last Name 1',
-    group: 'group 1',
-  },
-  {
-    id: 124,
-    email: 'def@gmail.com',
-    phoneNumber: '0123466666',
-    phoneCountry: 'us',
-    firstName: 'first Name 2',
-    lastName: 'last Name 2',
-    group: 'group 2',
-  },
-  {
-    id: 125,
-    email: 'ghi@gmail.com',
-    phoneNumber: '0123477777',
-    phoneCountry: 'us',
-    firstName: 'first Name 3',
-    lastName: 'last Name 3',
-    group: 'group 3',
-  }
-]
 
 const groups = [
   {

@@ -86,7 +86,7 @@ module.exports.createStore = () => {
   }
 
   const synchronize = async () => {
-    await participant.sync({ force: true })
+    await participant.sync()
   }
 
   return { participant, synchronize, testConnection }
