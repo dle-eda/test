@@ -1,6 +1,6 @@
 export const INITIAL_PARTICIPANT = {
   email: 'a@gmail.com',
-  phone: 84,
+  phone: '84',
   first_name: '',
   last_name: '',
   group: ''
