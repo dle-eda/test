@@ -6,11 +6,25 @@ import ParticipantManagement from './containers/ParticipantManagement'
 import reportWebVitals from './reportWebVitals'
 import rootStore from './store/rootStore'
 import { client } from './api'
+import useList from './hooks/useList'
+import { participantListContext } from './contexts/index'
+
+const ListProvider = ({ children }) => {
+  const listContext = useList()
+
+  return (
+    <participantListContext.Provider value={listContext}>
+      {children}
+    </participantListContext.Provider>
+  )
+}
 
 ReactDOM.render(
   <Provider store={rootStore}>
     <ApolloProvider client={client}>
-      <ParticipantManagement />
+      <ListProvider>
+        <ParticipantManagement />
+      </ListProvider>
     </ApolloProvider>
   </Provider>,
   document.getElementById('root')

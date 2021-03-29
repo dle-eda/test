@@ -6,7 +6,6 @@ const typeDefs = gql`
     id: Int
     email: String
     phone: String
-    country_code: String
     first_name: String
     last_name: String
     group: String
@@ -19,13 +18,13 @@ const typeDefs = gql`
 
   type Response {
     success: Boolean
+    error: Boolean
     message: String
   }
 
   input CreateParticipant {
     email: String
-    phone: Int
-    country_code: String
+    phone: String
     first_name: String
     last_name: String
     group: String
@@ -34,8 +33,7 @@ const typeDefs = gql`
   input UpdateParticipant {
     id: Int
     email: String
-    phone: Int
-    country_code: String
+    phone: String
     first_name: String
     last_name: String
     group: String
@@ -47,8 +45,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createParticipant(participant: CreateParticipant): Response
-    updateParticipant(participant: UpdateParticipant): Response
+    createParticipant(email: String, phone: String, first_name: String, last_name: String, group: String): Response
+    updateParticipant(id: Int, email: String, phone: String, first_name: String, last_name: String, group: String): Response
     deleteParticipant(id: Int): Response
   }
 `

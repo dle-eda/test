@@ -14,11 +14,11 @@ class ParticipantsAPI extends DataSource {
   }
 
   // CREATE Participant
-  async createParticipant({ email, phone, country_code, first_name, last_name, group }) {
+  async createParticipant({ email, phone, first_name, last_name, group }) {
     if (!isEmail.validate(email)) return error(ERROR_MESSAGE.invalid_error_1)
 
     const res = await this.store.participant.findOrCreate({
-      where: { email, phone, country_code, first_name, last_name, group },
+      where: { email, phone, first_name, last_name, group },
     })
 
     return res && res.length ? res[0].get() : false
@@ -26,6 +26,8 @@ class ParticipantsAPI extends DataSource {
 
   // UPDATE Participant
   async updateParticipant({ id, ...others }) {
+    if (!isEmail.validate(others.email)) return error(ERROR_MESSAGE.invalid_error_1)
+    
     const res = await this.store.participant.update({ ...others }, {
       where: { id },
     })

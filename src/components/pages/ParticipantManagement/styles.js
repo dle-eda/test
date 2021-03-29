@@ -19,7 +19,9 @@ export const AddParticipantButton = styled(Button)`
 `
 
 export const SaveButton = styled(Button)`
-  margin-top: 20px;
+  && {
+    margin-top: 20px;
+  }
 `
 
 export const ParticipantAccordionDetails = styled(AccordionDetails)`
@@ -30,4 +32,7 @@ export const PanelIconHeader = styled(MailOutlineIcon)`
   &{
     margin-right: 10px;
   }
+`
+export const EmptyList = styled.tr`
+  margin-top: 6px;
 `

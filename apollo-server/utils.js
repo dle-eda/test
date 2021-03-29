@@ -37,7 +37,6 @@ module.exports.createStore = () => {
   const sequelize = new Sequelize('database', 'user', 'name', {
     dialect: 'sqlite',
     storage: './store.sqlite',
-    operatorsAliases: false,
     logging: false
   })
 
@@ -52,10 +51,6 @@ module.exports.createStore = () => {
       allowNull: false
     },
     phone: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    country_code: {
       type: DataTypes.STRING,
       allowNull: true
     },

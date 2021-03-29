@@ -15,7 +15,8 @@ type ParticipantItemProps = {
   first_name: String,
   last_name: String,
   group: String,
-  onDelete: Function
+  onDelete: Function,
+  onChange: Function
 }
 
 const ParticipantItem = ({
@@ -25,26 +26,35 @@ const ParticipantItem = ({
   first_name,
   last_name,
   group,
-  onDelete
+  onDelete,
+  onChange
 }: ParticipantItemProps) => {
 
   const onDeleteHandler = () => {
     onDelete(id)
   }
+  const onChangeTextInput = (value, key) => {
+    onChange({ id, [key]: value, mutated: true })
+  }
+  
+  const onChangeGroupHandler = (event) => {
+    console.error('onChangeGroupHandler', event)
+  }
   return (
     <TableRow key={id}>
       <TableCell component="th" scope="row">
-        <TextField defaultValue={email} />
+        <TextField defaultValue={email} onChange={(event) => onChangeTextInput(event.target.value, 'email')}/>
       </TableCell>
-      <TableCell><PhoneNumber value={phone} /></TableCell>
-      <TableCell><TextField defaultValue={first_name} /></TableCell>
-      <TableCell><TextField defaultValue={last_name} /></TableCell>
+      <TableCell><PhoneNumber value={phone} onChange={value => onChangeTextInput(value, 'phone')}/></TableCell>
+      <TableCell><TextField defaultValue={first_name} onChange={(event) => onChangeTextInput(event.target.value, 'first_name')}/></TableCell>
+      <TableCell><TextField defaultValue={last_name} onChange={(event) => onChangeTextInput(event.target.value, 'last_name')}/></TableCell>
       <TableCell>
         <Autocomplete
           options={[]}
           inputValue={group}
           getOptionLabel={(option) => option.name}
           renderInput={(params) => <TextField {...params} variant="outlined" />}
+          onChange={onChangeGroupHandler}
         />
       </TableCell>
       <TableCell>
